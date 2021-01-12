@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDialogBackground"
+    android:layout_margin="@dimen/dp_8">
+
+    <TextView
+        android:id="@+id/textContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/text_add"
+        android:textSize="@dimen/sp_32"
+        android:textColor="@color/colorDialogText"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/text_name"
+        android:textSize="@dimen/sp_24"
+        android:textColor="@color/colorDialogText"
+        app:layout_constraintBottom_toBottomOf="@+id/editName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editName" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_weight"
+        android:textSize="@dimen/sp_24"
+        android:textColor="@color/colorDialogText"
+        app:layout_constraintBottom_toBottomOf="@+id/editWeight"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/editWeight" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_price"
+        android:textSize="@dimen/sp_24"
+        android:textColor="@color/colorDialogText"
+        app:layout_constraintBottom_toBottomOf="@+id/editPrice"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/editPrice" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_description"
+        android:textSize="@dimen/sp_24"
+        android:textColor="@color/colorDialogText"
+        app:layout_constraintBottom_toBottomOf="@+id/editDescription"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/editDescription" />
+
+    <Button
+        android:id="@+id/buttonChoose"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/text_choose"
+        style="@style/ButtonStyle"
+        android:layout_marginBottom="@dimen/dp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDescription" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_56"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/text_name"
+        android:autofillHints="@string/text_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textContent" />
+
+    <EditText
+        android:id="@+id/editWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:hint="@string/text_weight"
+        android:autofillHints="@string/text_weight"
+        app:layout_constraintStart_toStartOf="@+id/editName"
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
+
+    <EditText
+        android:id="@+id/editPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:hint="@string/text_price"
+        android:autofillHints="@string/text_price"
+        app:layout_constraintStart_toStartOf="@+id/editWeight"
+        app:layout_constraintTop_toBottomOf="@+id/editWeight" />
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/text_description"
+        app:layout_constraintStart_toStartOf="@+id/editPrice"
+        app:layout_constraintTop_toBottomOf="@+id/editPrice"
+        android:autofillHints="@string/text_description" />
+</androidx.constraintlayout.widget.ConstraintLayout>
