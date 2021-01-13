@@ -2,11 +2,11 @@ package com.example.petmanagerdemomvp
 
 import com.example.petmanagerdemomvp.model.Pet
 
-interface Contract {
+interface PetContract {
     interface View {
-        fun showPetList(arr: MutableList<Pet>)
-        fun showDialogAdd()
-        fun showDialogEdit(sendObject: Pet)
+        fun showPetList(petList: MutableList<Pet>)
+        fun showDialogAddPet()
+        fun showDialogEditPet(sendObject: Pet)
     }
 
     interface Presenter {
@@ -14,7 +14,7 @@ interface Contract {
         fun addPet()
         fun setEditPet(position: Int)
         fun setDeletePet(position: Int)
-        fun addItem(pet: Pet)
-        fun updateItem(pet: Pet)
+        fun addPet(pet: Pet)
+        fun updatePet(pet: Pet)
     }
 }

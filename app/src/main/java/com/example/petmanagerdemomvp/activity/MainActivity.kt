@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.example.petmanagerdemomvp.Contract
+import com.example.petmanagerdemomvp.PetContract
 import com.example.petmanagerdemomvp.PetAdapter
 import com.example.petmanagerdemomvp.R
 import com.example.petmanagerdemomvp.model.Pet
@@ -14,10 +14,10 @@ import com.example.petmanagerdemomvp.util.Checkout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.edit_item.view.*
 
-class MainActivity : AppCompatActivity(), Contract.View, View.OnClickListener{
-    private lateinit var petPresenter: PetPresenter
-    private lateinit var petAdapter: PetAdapter
-    private lateinit var alertDialog: AlertDialog
+class MainActivity : AppCompatActivity(), PetContract.View, View.OnClickListener {
+    private var petPresenter: PetPresenter? = null
+    private var petAdapter: PetAdapter? = null
+    private var alertDialog: AlertDialog? = null
     private var position = -1
     private var pet: Pet? = null
 
@@ -29,12 +29,12 @@ class MainActivity : AppCompatActivity(), Contract.View, View.OnClickListener{
         initControl()
     }
 
-    override fun showPetList(arr: MutableList<Pet>) {
-        petAdapter.arr = arr
+    override fun showPetList(petList: MutableList<Pet>) {
+        petAdapter?.petList = petList
         recyclerPet.adapter = petAdapter
     }
 
-    override fun showDialogAdd() {
+    override fun showDialogAddPet() {
         val view = layoutInflater.inflate(R.layout.edit_item, null)
         alertDialog = AlertDialog.Builder(this)
             .setView(view)
@@ -42,33 +42,33 @@ class MainActivity : AppCompatActivity(), Contract.View, View.OnClickListener{
         view.apply {
             buttonChoose.setOnClickListener(this@MainActivity)
             buttonChoose.text = getString(R.string.text_add)
-            textContent.text = getString(R.string.text_add_content)
+            textTitle.text = getString(R.string.text_add_content)
         }
     }
 
-    override fun showDialogEdit(sendObject: Pet) {
+    override fun showDialogEditPet(sendObject: Pet) {
         val view = layoutInflater.inflate(R.layout.edit_item, null)
         alertDialog = AlertDialog.Builder(this)
             .setView(view)
             .create()
-        alertDialog.show()
+        alertDialog?.show()
         view.apply {
             editName.setText(sendObject.name)
             editWeight.setText(sendObject.weight.toString())
             editPrice.setText(sendObject.price.toString())
             editDescription.setText(sendObject.description)
             buttonChoose.text = getString(R.string.text_edit)
-            textContent.text = getString(R.string.text_edit_content)
+            textTitle.text = getString(R.string.text_edit_content)
         }
         view.buttonChoose.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.buttonAdd -> showDialogAdd()
+            R.id.buttonAdd -> showDialogAddPet()
             R.id.buttonEdit -> {
                 if (position == -1) return
-                petPresenter.setEditPet(position)
+                petPresenter?.setEditPet(position)
             }
             R.id.buttonDelete -> askUser()
             R.id.buttonChoose -> {
@@ -90,9 +90,9 @@ class MainActivity : AppCompatActivity(), Contract.View, View.OnClickListener{
     }
 
     private fun initView() {
-        petAdapter = PetAdapter(layoutInflater, ::setPetItemClicked)
+        petAdapter = PetAdapter(this, ::setPetItemClicked)
         petPresenter = PetPresenter(this, Repository(this))
-        petPresenter.getPetList()
+        petPresenter?.getPetList()
     }
 
     private fun initControl() {
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity(), Contract.View, View.OnClickListener{
             .setTitle("Notification!")
             .setMessage("Do you want to delete the pet?")
             .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
-            .setPositiveButton("Yes") { _, _ -> petPresenter.setDeletePet(position) }
+            .setPositiveButton("Yes") { _, _ -> petPresenter?.setDeletePet(position) }
             .show()
     }
 
@@ -122,8 +122,8 @@ class MainActivity : AppCompatActivity(), Contract.View, View.OnClickListener{
                 description = editDescription.text.toString()
             }
         }
-        petPresenter.updateItem(pet ?: return)
-        alertDialog.dismiss()
+        petPresenter?.updatePet(pet ?: return)
+        alertDialog?.dismiss()
     }
 
     private fun checkContent(v: View) {
@@ -137,8 +137,8 @@ class MainActivity : AppCompatActivity(), Contract.View, View.OnClickListener{
                 editPrice.text.toString().toDouble(),
                 editDescription.text.toString()
             )
-            petPresenter.addItem(pet)
-            alertDialog.dismiss()
+            petPresenter?.addPet(pet)
+            alertDialog?.dismiss()
         }
     }
 }

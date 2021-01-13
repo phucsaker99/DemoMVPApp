@@ -1,37 +1,37 @@
 package com.example.petmanagerdemomvp.presenter
 
-import com.example.petmanagerdemomvp.Contract
+import com.example.petmanagerdemomvp.PetContract
 import com.example.petmanagerdemomvp.model.Repository
 import com.example.petmanagerdemomvp.model.Pet
 
 class PetPresenter(
-    private var mView: Contract.View,
-    private val mModel: Repository
-) : Contract.Presenter {
+    private var petView: PetContract.View,
+    private val petRepository: Repository
+) : PetContract.Presenter {
     override fun getPetList() {
-        mView.showPetList(mModel.sendData())
+        petView.showPetList(petRepository.sendPetList())
     }
 
     override fun addPet() {
-        mView.showDialogAdd()
+        petView.showDialogAddPet()
     }
 
     override fun setEditPet(position: Int) {
-        mView.showDialogEdit(mModel.sendObject(position))
+        petView.showDialogEditPet(petRepository.sendPet(position))
     }
 
     override fun setDeletePet(position: Int) {
-        mModel.deleteItem(position)
-        mView.showPetList(mModel.sendData())
+        petRepository.deletePet(position)
+        petView.showPetList(petRepository.sendPetList())
     }
 
-    override fun addItem(pet: Pet) {
-        mModel.addData(pet)
-        mView.showPetList(mModel.sendData())
+    override fun addPet(pet: Pet) {
+        petRepository.addPet(pet)
+        petView.showPetList(petRepository.sendPetList())
     }
 
-    override fun updateItem(pet: Pet) {
-        mModel.updateData(pet)
-        mView.showPetList(mModel.sendData())
+    override fun updatePet(pet: Pet) {
+        petRepository.updatePet(pet)
+        petView.showPetList(petRepository.sendPetList())
     }
 }

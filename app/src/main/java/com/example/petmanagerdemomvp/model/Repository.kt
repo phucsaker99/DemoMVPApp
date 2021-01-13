@@ -2,22 +2,22 @@ package com.example.petmanagerdemomvp.model
 
 import android.content.Context
 import android.widget.Toast
-import com.example.petmanagerdemomvp.InterfaceRepository
+import com.example.petmanagerdemomvp.PetRepository
 
 class Repository(private val context: Context) :
-    InterfaceRepository.Local {
-    private val mHelper = SqlData(context)
+    PetRepository.Local {
+    private val petDatabase = SqlData(context)
 
-    override fun sendData() = mHelper.getAllItem()
+    override fun sendPetList() = petDatabase.getAllPet()
 
-    override fun addData(pet: Pet) {
-        mHelper.addItem(pet)
+    override fun addPet(pet: Pet) {
+        petDatabase.addPet(pet)
         Toast.makeText(context, "pet added successfully", Toast.LENGTH_LONG).show()
     }
 
-    override fun sendObject(position: Int) = mHelper.getItem(position)
+    override fun sendPet(position: Int) = petDatabase.getPet(position)
 
-    override fun updateData(pet: Pet): Int = mHelper.updateItem(pet)
+    override fun updatePet(pet: Pet): Int = petDatabase.updatePet(pet)
 
-    override fun deleteItem(position: Int) = mHelper.deleteItem(position)
+    override fun deletePet(position: Int) = petDatabase.deletePet(position)
 }

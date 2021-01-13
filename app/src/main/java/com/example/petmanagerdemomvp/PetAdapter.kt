@@ -1,31 +1,31 @@
 package com.example.petmanagerdemomvp
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petmanagerdemomvp.model.Pet
-import com.example.petmanagerdemomvp.model.SqlData
 import kotlinx.android.synthetic.main.item_pet.view.*
 
 class PetAdapter(
-    private val layoutInflater: LayoutInflater,
+    private val context: Context,
     private val listener: (Pet) -> Unit
 ) : RecyclerView.Adapter<PetAdapter.ViewHolder>() {
-    var arr: MutableList<Pet>? = null
+    var petList: MutableList<Pet>? = null
         set(value) {
             notifyDataSetChanged()
             field = value
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(layoutInflater.inflate(R.layout.item_pet, parent, false))
+        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_pet, parent, false))
     }
 
-    override fun getItemCount(): Int = arr?.size ?: 0
+    override fun getItemCount(): Int = petList?.size ?: 0
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindData((arr ?: return)[position])
+        holder.bindData((petList ?: return)[position])
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,7 +33,7 @@ class PetAdapter(
         init {
             itemView.setOnClickListener {
                 listener(
-                    arr?.get(layoutPosition) ?: return@setOnClickListener
+                    petList?.get(layoutPosition) ?: return@setOnClickListener
                 )
             }
         }
