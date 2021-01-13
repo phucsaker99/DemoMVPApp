@@ -3,4 +3,15 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="colorItemBackground">#FFE67C</color>
+    <color name="colorItemText">#295F2D</color>
+    <color name="colorBackground">#161B21</color>
+    <color name="colorText">#F4A950</color>
+    <color name="colorDialogBackground">#D2302C</color>
+    <color name="colorDialogText">#F7F7F9</color>
+    <color name="colorHeader">#EC407A</color>
+    <color name="colorContent">#1565C0</color>
+    <color name="colorTextButton">#69F0AE</color>
+    <color name="colorBackgroundButton">#ECEFF1</color>
 </resources>
